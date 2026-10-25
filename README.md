@@ -1,4 +1,5 @@
-# Event Attendance & Certificate Management Portal
+# Event Attendance & Certificate Management Portal 
+
 
 A complete, self-hosted web application for Saurashtra University Startup & Entrepreneurship Council (SUSEC) events. Supports registration lookup, attendance marking, and one-click certificate PDF generation from Google Slides templates.
 
