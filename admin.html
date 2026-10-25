@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — SUSEC Event &amp; Certificate Portal</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" type="image/webp" href="assets/img/favicon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    if (window.top !== window.self) { window.top.location = window.self.location; }
+  </script>
+</head>
+<body>
+<div id="toast-container"></div>
+
+<!-- Admin Layout -->
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Admin navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="assets/img/susec-logo-white.webp" alt="SUSEC Logo" style="height:36px;width:auto">
+      </div>
+      <div>
+        <div class="sidebar-title">SUSEC Portal</div>
+        <div class="sidebar-subtitle">Admin Console</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Overview</div>
+        <button class="nav-item active" data-section="dashboard">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          </span>
+          <span>Dashboard</span>
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">Event Operations</div>
+        <button class="nav-item" data-section="events">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </span>
+          <span>All Events</span>
+        </button>
+        <button class="nav-item" data-section="bulk-attendance">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          </span>
+          <span>Bulk Attendance</span>
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">Portals</div>
+        <a href="attendance.html" target="_blank" rel="noopener noreferrer" class="nav-item" style="text-decoration:none">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </span>
+          <span>Attendance Desk</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:0.6"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <a href="certificate.html" target="_blank" rel="noopener noreferrer" class="nav-item" style="text-decoration:none">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="7" y1="8" x2="17" y2="8"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="7" y1="16" x2="13" y2="16"></line></svg>
+          </span>
+          <span>Certificate Desk</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:0.6"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <a href="index.html" target="_blank" rel="noopener noreferrer" class="nav-item" style="text-decoration:none">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </span>
+          <span>Portal Gateway</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:0.6"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">Account</div>
+        <button class="nav-item" data-section="settings">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </span>
+          <span>Security &amp; Settings</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">A</div>
+        <span class="sidebar-username" id="sidebar-username">Admin</span>
+        <button class="sidebar-logout" id="btn-logout" title="Sign out" aria-label="Sign out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open sidebar menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <img src="assets/img/su-logo.webp" alt="Saurashtra University" style="height:34px;width:auto">
+          <h1 class="topbar-title" id="topbar-title">Dashboard</h1>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <a href="index.html" class="btn btn-sm btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Portal Home</span>
+        </a>
+        <button class="btn btn-sm btn-primary" id="btn-create-event" onclick="openCreateEventModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Create Event</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ── SECTION: Dashboard ── -->
+    <section id="section-dashboard" class="admin-section page-content">
+      <div class="page-header">
+        <h1>SUSEC Events Overview</h1>
+        <p>Live status of your department events, registrations, and portal activations.</p>
+      </div>
+
+      <div id="dashboard-error" class="alert alert-danger hidden" style="margin-bottom:1.5rem"></div>
+
+      <!-- Quick Metrics -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#f0f7ff;color:var(--susec-navy)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="stat-total-events">—</div>
+            <div class="stat-label">Total Events Configured</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#ecfdf5;color:#059669">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="stat-active-events">—</div>
+            <div class="stat-label">Active Portals Live</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#fef3c7;color:#d97706">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="stat-cert-events">—</div>
+            <div class="stat-label">Certificates Enabled</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events Grid Header -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+        <h2 style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em">Configured Events</h2>
+        <button class="btn btn-sm btn-primary" onclick="openCreateEventModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Add New Event</span>
+        </button>
+      </div>
+
+      <div class="events-grid" id="events-grid">
+        <div class="skeleton" style="height:220px;border-radius:var(--radius-xl)"></div>
+        <div class="skeleton" style="height:220px;border-radius:var(--radius-xl)"></div>
+      </div>
+    </section>
+
+    <!-- ── SECTION: All Events ── -->
+    <section id="section-events" class="admin-section page-content hidden">
+      <div class="page-header">
+        <h1>All Events</h1>
+        <p>Manage, edit, or configure settings for each active or historical event.</p>
+      </div>
+      <div class="events-grid" id="events-grid-2"></div>
+    </section>
+
+    <!-- ── SECTION: Bulk Attendance ── -->
+    <section id="section-bulk-attendance" class="admin-section page-content hidden">
+      <div class="page-header">
+        <h1>Bulk Attendance Marking</h1>
+        <p>Rapidly review participants and record attendance in batch.</p>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group" style="max-width:440px;margin-bottom:1.5rem">
+            <label for="bulk-event-selector">Select Target Event</label>
+            <select class="select" id="bulk-event-selector" onchange="loadBulkSection(this.value)">
+              <option value="">— Choose Event —</option>
+            </select>
+          </div>
+
+          <div style="display:flex;gap:0.75rem;margin-bottom:1.25rem;flex-wrap:wrap">
+            <button class="btn btn-outline btn-sm" onclick="selectAllBulk()">Select All Unmarked</button>
+            <button class="btn btn-primary btn-sm" onclick="submitBulkAttendance()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Mark <strong id="bulk-selected-count">0</strong> Present</span>
+            </button>
+          </div>
+
+          <div class="alert alert-warning" style="margin-bottom:1.25rem">
+            <span class="alert-icon">&#9888;</span>
+            <span>Bulk attendance directly updates rows in your connected Google Sheet.</span>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:48px">Select</th>
+                  <th>Participant Name</th>
+                  <th>Institution / Affiliation</th>
+                  <th>Attendance Status</th>
+                </tr>
+              </thead>
+              <tbody id="bulk-att-tbody">
+                <tr><td colspan="4" class="text-center" style="padding:40px;color:var(--text-tertiary)">Select an event from the dropdown to load registered attendees.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION: Settings ── -->
+    <section id="section-settings" class="admin-section page-content hidden">
+      <div class="page-header">
+        <h1>Account &amp; Security</h1>
+        <p>Update administrator credentials and manage secure session tokens.</p>
+      </div>
+      <div class="card" style="max-width:520px">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Change Password</div>
+            <div class="card-subtitle">Passwords must be at least 12 characters long.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="curr-password">Current Password</label>
+            <input type="password" id="curr-password" class="input" placeholder="Enter current password" autocomplete="current-password">
+          </div>
+          <div class="form-group mt-4">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" class="input" placeholder="New strong password (min 12 chars)" autocomplete="new-password">
+          </div>
+          <div class="form-group mt-4">
+            <label for="confirm-password">Confirm New Password</label>
+            <input type="password" id="confirm-password" class="input" placeholder="Re-enter new password" autocomplete="new-password">
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-danger" id="btn-change-password">
+            <span>Update Admin Password</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /main-content -->
+</div><!-- /admin-layout -->
+
+<!-- ── Event Config Modal ── -->
+<div class="modal-overlay" id="event-modal" role="dialog" aria-modal="true" aria-labelledby="event-modal-title">
+  <div class="modal" style="max-width:860px">
+    <div class="modal-header">
+      <h2 class="modal-title" id="event-modal-title">Configure Event</h2>
+      <button class="modal-close" id="btn-cancel-event" aria-label="Close modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="event-form-error" class="alert alert-danger hidden" style="margin-bottom:1.25rem"></div>
+      <form id="event-form" novalidate>
+        <p id="ev-event-id-display" class="text-xs font-mono" style="color:var(--text-tertiary);margin-bottom:1.25rem"></p>
+
+        <div class="form-row form-row-2" style="margin-bottom:1.25rem">
+          <div class="form-group">
+            <label for="ev-event-name">Event Title <span class="required">*</span></label>
+            <input id="ev-event-name" class="input" type="text" placeholder="e.g. National Robotics Symposium" required>
+          </div>
+          <div class="form-group">
+            <label for="ev-event-date">Event Date <span class="required">*</span></label>
+            <input id="ev-event-date" class="input" type="date" required>
+          </div>
+        </div>
+
+        <div class="form-row form-row-3" style="margin-bottom:1.5rem">
+          <div class="form-group">
+            <label for="ev-start-time">Start Time</label>
+            <input id="ev-start-time" class="input" type="time">
+          </div>
+          <div class="form-group">
+            <label for="ev-end-time">End Time</label>
+            <input id="ev-end-time" class="input" type="time">
+          </div>
+          <div class="form-group">
+            <label for="ev-event-type">Format</label>
+            <select id="ev-event-type" class="select">
+              <option value="online">Online / Virtual</option>
+              <option value="offline">In-Person / Offline</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.85rem">Registration Spreadsheet (Google Sheets)</h3>
+        <div class="form-group" style="margin-bottom:1rem">
+          <label for="ev-spreadsheet-id">Google Spreadsheet ID <span class="required">*</span></label>
+          <input id="ev-spreadsheet-id" class="input" type="text" placeholder="e.g. 13XKdYV14zpg_T05F689qBmsKba6AgnQS9ZNRJ-s2d-E" required>
+          <span class="field-hint">From URL: docs.google.com/spreadsheets/d/<strong>ID</strong>/edit</span>
+        </div>
+        <div class="form-group" style="margin-bottom:1rem">
+          <label for="ev-worksheet-name">Worksheet Tab Name <span class="required">*</span></label>
+          <select id="ev-worksheet-name" class="select col-selector" disabled>
+            <option value="">— Enter Spreadsheet ID first —</option>
+          </select>
+        </div>
+        <div id="sample-preview" style="margin-bottom:1rem"></div>
+
+        <hr class="divider">
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.85rem">Event Filtering Mode</h3>
+        <div class="form-row form-row-2" style="margin-bottom:1rem">
+          <div class="form-group">
+            <label for="ev-filter-mode">Filter Strategy</label>
+            <select id="ev-filter-mode" class="select">
+              <option value="interest">Interest / Multi-Event Column Filter</option>
+              <option value="all">Include All Rows in Sheet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ev-interest-column">Interest Column</label>
+            <select id="ev-interest-column" class="select col-selector" disabled>
+              <option value="">— Select worksheet first —</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row form-row-2" style="margin-bottom:1rem">
+          <div class="form-group">
+            <label for="ev-interest-value-dropdown">Detected Values</label>
+            <select id="ev-interest-value-dropdown" class="select" disabled>
+              <option value="">— Select interest column first —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ev-interest-value">Interest Match Value <span class="required">*</span></label>
+            <input id="ev-interest-value" class="input" type="text" placeholder="e.g. Robotics Workshop" required>
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.85rem">Column Mappings</h3>
+        <div class="form-row form-row-2" style="margin-bottom:1rem">
+          <div class="form-group">
+            <label for="ev-name-column">Full Name Column <span class="required">*</span></label>
+            <select id="ev-name-column" class="select col-selector" required disabled><option value="">—</option></select>
+          </div>
+          <div class="form-group">
+            <label for="ev-email-column">Email Address Column <span class="required">*</span></label>
+            <select id="ev-email-column" class="select col-selector" required disabled><option value="">—</option></select>
+          </div>
+          <div class="form-group">
+            <label for="ev-institution-column">Institution / College Column</label>
+            <select id="ev-institution-column" class="select col-selector" disabled><option value="">—</option></select>
+          </div>
+          <div class="form-group">
+            <label for="ev-status-column">Attendance Status Column <span class="required">*</span></label>
+            <select id="ev-status-column" class="select col-selector" required disabled><option value="">—</option></select>
+          </div>
+          <div class="form-group">
+            <label for="ev-attendance-ts-column">Attendance Timestamp Column</label>
+            <select id="ev-attendance-ts-column" class="select col-selector" disabled><option value="">—</option></select>
+          </div>
+          <div class="form-group">
+            <label for="ev-cert-name-column">Certificate Printed Name Column</label>
+            <select id="ev-cert-name-column" class="select col-selector" disabled><option value="">—</option></select>
+          </div>
+          <div class="form-group">
+            <label for="ev-cert-status-column">Certificate Status Column</label>
+            <select id="ev-cert-status-column" class="select col-selector" disabled><option value="">—</option></select>
+          </div>
+          <div class="form-group">
+            <label for="ev-cert-url-column">Certificate URL Column</label>
+            <select id="ev-cert-url-column" class="select col-selector" disabled><option value="">—</option></select>
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.85rem">Certificate Generation Engine (Google Slides &amp; Drive)</h3>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label for="ev-slides-template-id">Google Slides Template ID <span class="required">*</span></label>
+            <input id="ev-slides-template-id" class="input" type="text" placeholder="Slides ID from presentation URL">
+            <span class="field-hint">docs.google.com/presentation/d/<strong>TEMPLATE_ID</strong>/edit</span>
+          </div>
+          <div class="form-group">
+            <label for="ev-output-folder-id">Output Drive Folder ID <span class="required">*</span></label>
+            <input id="ev-output-folder-id" class="input" type="text" placeholder="Folder ID where PDFs are saved">
+            <span class="field-hint">drive.google.com/drive/folders/<strong>FOLDER_ID</strong></span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" id="btn-cancel-event-footer" onclick="closeEventModal()">Cancel</button>
+      <button class="btn btn-primary" id="btn-save-event">Save Event Configuration</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/shared.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const res = await API.listAdminEvents();
+      const events = Array.isArray(res.data) ? res.data : (res.data?.events || res.events || []);
+      const sel = document.getElementById('bulk-event-selector');
+      if (sel) {
+        sel.innerHTML = '<option value="">— Choose Event —</option>';
+        events.forEach(ev => {
+          const opt = document.createElement('option');
+          opt.value = ev.eventId || ev.eventID;
+          opt.textContent = ev.eventName + ' (' + formatDate(ev.eventDate) + ')';
+          sel.appendChild(opt);
+        });
+      }
+    } catch {}
+  });
+</script>
+</body>
+</html>

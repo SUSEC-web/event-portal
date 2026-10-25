@@ -1,0 +1,27 @@
+# ── Google Apps Script files ──────────────────────────────────
+# These are deployed to Google Apps Script, NOT to GitHub Pages.
+# They must NEVER be committed to a public repository because
+# Config.gs may contain your Master Sheet ID.
+apps-script/
+
+# ── Environment / secrets ─────────────────────────────────────
+.env
+*.env
+secrets.json
+credentials.json
+
+# ── Editor / OS ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Node (if you use clasp for local development) ─────────────
+node_modules/
+.clasp.json
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log

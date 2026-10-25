@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — SUSEC Event &amp; Certificate Portal</title>
+  <meta name="description" content="Secure administrator login for Saurashtra University Startup &amp; Entrepreneurship Council">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" type="image/webp" href="assets/img/favicon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    if (window.top !== window.self) { window.top.location = window.self.location; }
+  </script>
+</head>
+<body>
+  <div id="toast-container"></div>
+  <main class="login-page">
+    <div class="login-card" role="main">
+      <div class="login-header">
+        <div class="login-logo">
+          <img src="assets/img/susec-logo-white.webp" alt="SUSEC Logo" style="height:48px;width:auto">
+        </div>
+        <h1>SUSEC Admin Console</h1>
+        <p>Saurashtra University Startup &amp; Entrepreneurship Council</p>
+      </div>
+
+      <div class="login-body">
+        <form id="login-form" novalidate autocomplete="off">
+          <div class="form-group">
+            <label for="username">Username <span class="required">*</span></label>
+            <input
+              type="text"
+              id="username"
+              class="input"
+              placeholder="Enter admin username"
+              autocomplete="username"
+              required
+              autofocus
+              aria-describedby="username-hint">
+            <span id="username-hint" class="field-hint">Default is admin</span>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="password">Password <span class="required">*</span></label>
+            <div style="position:relative">
+              <input
+                type="password"
+                id="password"
+                class="input"
+                placeholder="Enter password"
+                autocomplete="current-password"
+                required
+                style="padding-right:3rem">
+              <button
+                type="button"
+                id="toggle-password"
+                class="btn btn-icon"
+                style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--text-tertiary);background:none;border:none;cursor:pointer;padding:4px"
+                aria-label="Toggle password visibility">
+                <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="login-error" class="alert alert-danger login-error hidden" role="alert" aria-live="polite"></div>
+
+          <button type="submit" id="btn-login" class="btn btn-primary btn-block btn-lg" style="margin-top:1.75rem">
+            Sign In to Dashboard &rarr;
+          </button>
+        </form>
+
+        <div id="lockout-msg" class="alert alert-warning hidden" style="margin-top:1.25rem" role="alert">
+          <span class="alert-icon">&#9888;</span>
+          <span id="lockout-text">Too many failed attempts. Please wait before trying again.</span>
+        </div>
+      </div>
+
+      <div class="login-footer">
+        <a href="index.html" style="color:var(--primary);font-weight:600">&larr; Return to Home</a>
+        &nbsp;&middot;&nbsp;
+        <span>Sessions secured via SHA-256 tokens</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script>
+    Auth.redirectIfLoggedIn('admin.html');
+
+    const form = document.getElementById('login-form');
+    const loginBtn = document.getElementById('btn-login');
+    const errorEl = document.getElementById('login-error');
+    const lockoutEl = document.getElementById('lockout-msg');
+    const togglePwd = document.getElementById('toggle-password');
+
+    togglePwd.addEventListener('click', () => {
+      const pwd = document.getElementById('password');
+      const isPwd = pwd.type === 'password';
+      pwd.type = isPwd ? 'text' : 'password';
+      togglePwd.innerHTML = isPwd
+        ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>`
+        : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>`;
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+      lockoutEl.classList.add('hidden');
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        showAlert('login-error', 'Please enter both username and password.', 'danger');
+        return;
+      }
+
+      setButtonLoading(loginBtn, true, 'Signing In…');
+
+      try {
+        const res = await API.adminLogin(username, password);
+        Auth.saveSession(res.data.token, res.data.username, res.data.expiresAt);
+        Toast.success('Welcome, ' + res.data.username + '!');
+        setTimeout(() => { window.location.href = 'admin.html'; }, 500);
+      } catch (err) {
+        setButtonLoading(loginBtn, false);
+        if (err.message && err.message.toLowerCase().includes('locked')) {
+          document.getElementById('lockout-text').textContent = err.message;
+          lockoutEl.classList.remove('hidden');
+        } else {
+          showAlert('login-error', err.message || 'Invalid credentials. Please try again.', 'danger');
+        }
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+      }
+    });
+  </script>
+</body>
+</html>
