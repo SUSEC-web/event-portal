@@ -21,7 +21,7 @@ A complete, self-hosted web application for Saurashtra University Startup & Entr
 
 ---
 
-## Repository Structure
+## Repository Structure 
 
 ```
 event-certificate-portal/
