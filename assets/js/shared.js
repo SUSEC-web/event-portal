@@ -7,7 +7,7 @@
 // IMPORTANT: Update APPS_SCRIPT_URL after deploying your Apps Script Web App.
 // This URL is NOT a secret; security is enforced by the backend.
 const CONFIG = {
-  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbz5VueEArv7Ymu0a8D0Om-7rraSaAZMvJvcTX4C1LwlkQ_jwV2Bka4ahJgxXWzOOYsT1A/exec',
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyNpLcGYexy_URv-5ozeoHCPNOhbVT21SLvoXdscC80ChNp3pYA6s2QVWqd66JMFyUJdQ/exec',
   SESSION_KEY: 'cert_portal_session',
   SESSION_USER_KEY: 'cert_portal_user',
   DEBOUNCE_DELAY: 320,
